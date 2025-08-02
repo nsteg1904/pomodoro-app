@@ -13,6 +13,7 @@ const app = createApp(App);
 app.use(PrimeVue, {
   theme: {
     preset: Aura,
+    options: {},
   },
 });
 app.use(createPinia());
