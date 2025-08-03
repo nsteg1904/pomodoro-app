@@ -11,7 +11,8 @@
       "@components": ["./src/components/index.ts"],
       "@assets": ["./src/assets/index.ts"],
       "@views": ["./src/views/index.ts"],
-      "@stores": ["./src/stores/index.ts"]
+      "@stores": ["./src/stores/index.ts"],
+      "@utils": ["./src/utils/index.ts"]
     }
   }
 }
