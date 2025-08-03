@@ -5,7 +5,7 @@
       :unstyled="true"
       :class="classes"
       :icon="'pi ' + icon"
-      @click="onClick"
+      @click="$emit('click')"
       :pt="{
         icon: {
           class: iconSize,
@@ -18,8 +18,39 @@
 <script setup lang="ts">
 import { Button } from 'primevue';
 import { computed } from 'vue';
-import type { IconButtonProps } from './IconButton.types';
-import { iconMap, iconSizeMap } from './IconButton.types';
+
+// CONSTANTS
+
+const iconMap = {
+  sun: 'pi-sun',
+  moon: 'pi-moon',
+  reset: 'pi-replay',
+  settings: 'pi-cog',
+};
+
+const iconSizeMap = {
+  small: 'text-sm!',
+  medium: 'text-md!',
+  large: 'text-lg!',
+  extraLarge: 'text-xl!',
+};
+
+// TYPES
+
+type IconButtonEmits = {
+  (e: 'click'): void;
+};
+
+type IconButtonProps = {
+  label?: string;
+  icon: keyof typeof iconMap;
+  size?: keyof typeof iconSizeMap;
+  variant?: 'transparent' | 'translucent' | 'primary';
+};
+
+// LOGIC
+
+defineEmits<IconButtonEmits>();
 
 const props = withDefaults(defineProps<IconButtonProps>(), {
   variant: 'primary',

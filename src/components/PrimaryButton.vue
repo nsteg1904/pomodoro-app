@@ -5,14 +5,29 @@
       :label
       :unstyled="true"
       :class="classes"
-      @click="onClick"
+      @click="$emit('click')"
     />
   </div>
 </template>
 <script setup lang="ts">
 import { Button } from 'primevue';
 import { computed } from 'vue';
-import type { PrimaryButtonProps } from './PrimaryButton.types';
+
+// TYPES
+
+export type PrimaryButtonEmits = {
+  (e: 'click'): void;
+};
+
+export type PrimaryButtonProps = {
+  label: string;
+  variant?: 'filled' | 'outlined';
+  color?: 'primary' | 'secondary' | 'critical';
+};
+
+// LOGIC
+
+defineEmits<PrimaryButtonEmits>();
 
 const props = withDefaults(defineProps<PrimaryButtonProps>(), {
   color: 'primary',

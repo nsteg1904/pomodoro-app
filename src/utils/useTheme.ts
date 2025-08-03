@@ -1,10 +1,10 @@
-import { onMounted, ref, watchEffect } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 
 export default function useTheme() {
-  const theme = ref();
+  const theme = ref<'light' | 'dark'>('light');
 
   onMounted(() => {
-    const stored = localStorage.getItem('data-theme');
+    const stored = localStorage.getItem('data-theme') as 'light' | 'dark';
     // If there's a stored value, use it; otherwise fallback to system preference
     if (stored) {
       theme.value = stored;
@@ -15,10 +15,14 @@ export default function useTheme() {
       theme.value = prefersDark ? 'dark' : 'light';
     }
 
-    watchEffect(() => {
-      localStorage.setItem('data-theme', theme.value);
-      document.documentElement.setAttribute('data-theme', theme.value);
-    });
+    watch(
+      theme,
+      newTheme => {
+        localStorage.setItem('data-theme', newTheme);
+        document.documentElement.setAttribute('data-theme', newTheme);
+      },
+      { immediate: true }
+    );
   });
 
   // Reactively watch theme and update HTML + localStorage

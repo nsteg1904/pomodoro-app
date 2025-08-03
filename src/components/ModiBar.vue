@@ -1,25 +1,46 @@
 <template>
   <div class="flex gap-4">
     <ProgressButton
-      :dotAmount="4"
-      :dotProgress="3"
+      :dotAmount="timerState.config.longBreakInterval"
+      :dotProgress="timerState.cycleCount"
       label="Focus"
-      :on-click="() => console.log('focus')"
+      @click="handleFocusClick"
     /><PrimaryButton
       label="Short Break"
       variant="outlined"
-      :on-click="() => console.log('short break')"
+      @click="handleShortClick"
     /><PrimaryButton
       label="Long Break"
       variant="outlined"
-      :on-click="() => console.log('long break')"
+      @click="handleLongClick"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import PrimaryButton from './PrimaryButton/PrimaryButton.vue';
+import { useTimerStore } from '@stores';
+import { storeToRefs } from 'pinia';
+import PrimaryButton from './PrimaryButton.vue';
 import ProgressButton from './ProgressButton.vue';
+
+const { timerState } = storeToRefs(useTimerStore());
+const timerStore = useTimerStore();
+
+// TODO: add modal to warn about progress loss
+const handleFocusClick = () => {
+  timerStore.setMode('pomodoro');
+  timerStore.reset();
+};
+
+const handleShortClick = () => {
+  timerStore.setMode('shortBreak');
+  timerStore.reset();
+};
+
+const handleLongClick = () => {
+  timerStore.setMode('longBreak');
+  timerStore.reset();
+};
 
 //add store to monitor progress
 </script>

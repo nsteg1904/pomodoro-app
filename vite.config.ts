@@ -8,7 +8,6 @@ export default defineConfig({
   plugins: [vue(), vueDevTools(), tailwindcss()],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
       '@layouts': fileURLToPath(
         new URL('./src/layouts/index.ts', import.meta.url)
       ),
@@ -23,6 +22,7 @@ export default defineConfig({
         new URL('./src/stores/index.ts', import.meta.url)
       ),
       '@utils': fileURLToPath(new URL('./src/utils/index.ts', import.meta.url)),
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
 });

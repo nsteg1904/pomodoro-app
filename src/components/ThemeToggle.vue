@@ -1,14 +1,14 @@
 <template>
   <IconButton
     :icon="mode"
-    :on-click="toggleTheme"
+    @click="toggleTheme"
   />
 </template>
 
 <script setup lang="ts">
 import { useTheme } from '@utils';
 import { computed } from 'vue';
-import IconButton from './IconButton/IconButton.vue';
+import IconButton from './IconButton.vue';
 
 const { theme, toggleTheme } = useTheme();
 
