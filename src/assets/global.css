@@ -1,3 +1,8 @@
+@import 'tailwindcss';
+@import 'tailwindcss-primeui';
+@plugin "daisyui";
+@custom-variant dark (&:where(.theme-dark, .theme-dark *));
+
 html,
 body {
   padding: 0;
@@ -9,8 +14,29 @@ body {
   font-family: 'Archivo', sans-serif;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: light !important;
+  }
+
+  .theme-dark {
+    color-scheme: dark !important;
+  }
+}
+
 :root {
-  --space-unit: 1em;
+  /* Radius */
+  --radius-unit: 1rem;
+  --radius-xs: calc(0.25 * var(--radius-unit));
+  --radius-sm: calc(0.375 * var(--radius-unit));
+  --radius-md: calc(0.5 * var(--radius-unit));
+  --radius-lg: calc(0.75 * var(--radius-unit));
+  --radius-xl: calc(1 * var(--radius-unit));
+  --radius-xxl: calc(2 * var(--radius-unit));
+  --radius-full: calc(50 * var(--radius-unit));
+
+  /* Spacing */
+  --space-unit: 1rem;
   --space-xxxs: calc(0.25 * var(--space-unit));
   --space-xxs: calc(0.375 * var(--space-unit));
   --space-xs: calc(0.5 * var(--space-unit));
