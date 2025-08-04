@@ -26,7 +26,7 @@ import { storeToRefs } from 'pinia';
 import PrimaryButton from './PrimaryButton.vue';
 import ProgressButton from './ProgressButton.vue';
 import { computed } from 'vue';
-import type { PrimaryButtonVariant, TimerMode } from '@/utils/types';
+import type { PrimaryButtonVariant, TimerMode } from '@utils';
 
 const { timerState, timerCofig } = storeToRefs(useTimerStore());
 const timerStore = useTimerStore();

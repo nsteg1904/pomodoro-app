@@ -10,7 +10,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import type { PrimaryButtonVariant } from '@/utils/types';
+import type { PrimaryButtonVariant } from '@/utils';
 import { Button } from 'primevue';
 import { computed } from 'vue';
 
