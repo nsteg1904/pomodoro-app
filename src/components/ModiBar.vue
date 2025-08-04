@@ -1,5 +1,16 @@
 <template>
   <div class="flex gap-4">
+    <!--
+    Refactoring idea:
+
+    - Remove the separate ProgressButton component.
+    - Use only the PrimaryButton component.
+    - Render all timer buttons (Focus, Short Break, Long Break) dynamically using a v-for loop.
+    - Show progress dots (dotProgress / dotAmount) for the Focus mode.
+    - Set all button props centrally using a computed property. (The existing getButtonVariantForMode property can be extended or renamed for this purpose.)
+
+    -->
+
     <ProgressButton
       :dotAmount="timerCofig.longBreakInterval"
       :dotProgress="timerState.cycleCount"
