@@ -28,6 +28,12 @@ import ProgressButton from './ProgressButton.vue';
 import { computed } from 'vue';
 import type { PrimaryButtonVariant, TimerMode } from '@utils';
 
+// TYPES
+
+type TimerButtonsVariants = Record<TimerMode, PrimaryButtonVariant>;
+
+// LOGIC
+
 const { timerState, timerCofig } = storeToRefs(useTimerStore());
 const timerStore = useTimerStore();
 
@@ -35,10 +41,6 @@ const timerStore = useTimerStore();
 const handleClick = (mode: TimerMode) => {
   timerStore.setMode(mode);
   timerStore.reset();
-};
-
-type TimerButtonsVariants = {
-  [k in TimerMode]: PrimaryButtonVariant;
 };
 
 const calcVariant = (variantType: TimerMode) =>
