@@ -5,17 +5,17 @@
       :dotProgress="timerState.cycleCount"
       :variant="getButtonVariantForMode['focus']"
       label="Focus"
-      @click="handleFocusClick"
+      @click="handleClick('focus')"
     />
     <PrimaryButton
       label="Short Break"
       :variant="getButtonVariantForMode['shortBreak']"
-      @click="handleShortClick"
+      @click="handleClick('shortBreak')"
     />
     <PrimaryButton
       label="Long Break"
       :variant="getButtonVariantForMode['longBreak']"
-      @click="handleLongClick"
+      @click="handleClick('longBreak')"
     />
   </div>
 </template>
@@ -32,18 +32,8 @@ const { timerState, timerCofig } = storeToRefs(useTimerStore());
 const timerStore = useTimerStore();
 
 // TODO: add modal to warn about progress loss
-const handleFocusClick = () => {
-  timerStore.setMode('focus');
-  timerStore.reset();
-};
-
-const handleShortClick = () => {
-  timerStore.setMode('shortBreak');
-  timerStore.reset();
-};
-
-const handleLongClick = () => {
-  timerStore.setMode('longBreak');
+const handleClick = (mode: TimerMode) => {
+  timerStore.setMode(mode);
   timerStore.reset();
 };
 
