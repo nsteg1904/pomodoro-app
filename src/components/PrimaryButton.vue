@@ -10,6 +10,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import type { PrimaryButtonVariant } from '@/utils/types';
 import { Button } from 'primevue';
 import { computed } from 'vue';
 
@@ -21,7 +22,7 @@ export type PrimaryButtonEmits = {
 
 export type PrimaryButtonProps = {
   label: string;
-  variant?: 'filled' | 'outlined';
+  variant?: PrimaryButtonVariant;
   color?: 'primary' | 'secondary' | 'critical';
 };
 

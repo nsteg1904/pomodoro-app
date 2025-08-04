@@ -1,7 +1,8 @@
 <template>
   <div class="flex flex-col gap-2 items-center w-fit">
     <PrimaryButton
-      v-bind="props"
+      :label="label"
+      :variant="variant"
       @click="$emit('click')"
     />
     <div class="flex gap-1 justify-center">
@@ -26,8 +27,10 @@ defineEmits<PrimaryButtonEmits>();
 type ProgressButtonProps = {
   dotAmount: number;
   dotProgress: number;
-} & Pick<PrimaryButtonProps, 'label'>;
+} & Pick<PrimaryButtonProps, 'label' | 'variant'>;
 
-const props = defineProps<ProgressButtonProps>();
+withDefaults(defineProps<ProgressButtonProps>(), {
+  variant: 'filled',
+});
 </script>
 <style module lang="scss"></style>

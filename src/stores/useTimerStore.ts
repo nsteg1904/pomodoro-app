@@ -1,8 +1,9 @@
+import type { TimerMode } from '@/utils/types';
 import { defineStore } from 'pinia';
 import { computed, reactive } from 'vue';
 
 type ConfigProps = {
-  pomodoro: number;
+  focus: number;
   shortBreak: number;
   longBreak: number;
   longBreakInterval: number;
@@ -11,7 +12,7 @@ type ConfigProps = {
 type TimerStoreProps = {
   isRunning: boolean;
   secondsLeft: number;
-  mode: 'pomodoro' | 'shortBreak' | 'longBreak';
+  mode: TimerMode;
   cycleCount: number;
   config: ConfigProps;
   intervalId: number | null;
@@ -22,10 +23,10 @@ export const useTimerStore = defineStore('TimerStore', () => {
   const timerState = reactive<TimerStoreProps>({
     isRunning: false,
     secondsLeft: 1500, // default 25 min
-    mode: 'pomodoro',
+    mode: 'focus',
     cycleCount: 0,
     config: {
-      pomodoro: 25 * 60,
+      focus: 25 * 60,
       shortBreak: 5 * 60,
       longBreak: 15 * 60,
       longBreakInterval: 4,
@@ -41,24 +42,24 @@ export const useTimerStore = defineStore('TimerStore', () => {
     return `${m}:${s}`;
   });
 
-  const isBreak = computed(() => timerState.mode !== 'pomodoro');
+  const isBreak = computed(() => timerState.mode !== 'focus');
 
   const nextCycle = () => {
-    if (timerState.mode === 'pomodoro') {
+    if (timerState.mode === 'focus') {
       timerState.cycleCount++;
       timerState.mode =
         timerState.cycleCount % timerState.config.longBreakInterval === 0
           ? 'longBreak'
           : 'shortBreak';
     } else {
-      timerState.mode = 'pomodoro';
+      timerState.mode = 'focus';
     }
 
     timerState.secondsLeft = timerState.config[timerState.mode];
     start(); // auto-start next session
   };
 
-  const setMode = (mode: 'pomodoro' | 'shortBreak' | 'longBreak') => {
+  const setMode = (mode: 'focus' | 'shortBreak' | 'longBreak') => {
     pause();
     timerState.mode = mode;
     timerState.secondsLeft = timerState.config[mode];
