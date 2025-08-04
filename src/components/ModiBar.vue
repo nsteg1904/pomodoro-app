@@ -1,7 +1,7 @@
 <template>
   <div class="flex gap-4">
     <ProgressButton
-      :dotAmount="timerState.config.longBreakInterval"
+      :dotAmount="timerCofig.longBreakInterval"
       :dotProgress="timerState.cycleCount"
       :variant="getButtonVariantForMode['focus']"
       label="Focus"
@@ -28,7 +28,7 @@ import ProgressButton from './ProgressButton.vue';
 import { computed } from 'vue';
 import type { PrimaryButtonVariant, TimerMode } from '@/utils/types';
 
-const { timerState } = storeToRefs(useTimerStore());
+const { timerState, timerCofig } = storeToRefs(useTimerStore());
 const timerStore = useTimerStore();
 
 // TODO: add modal to warn about progress loss
